@@ -1,6 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using Platformer.Core;
+using Platformer.Gameplay;
+using Platformer.Mechanics;
 
 public class Boss : MonoBehaviour
 {
@@ -30,6 +32,9 @@ public class Boss : MonoBehaviour
 
     private Vector2 defaultleftVector;
     private Vector2 defaultrightVector;
+    private Vector3 punchTargetPosition;
+    private bool hasPunchTarget = false;
+    private bool punchTargetLocked = false;
 
     //public bool hit = false;
 
@@ -52,7 +57,7 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
-        
+
 
 
     }
@@ -61,7 +66,7 @@ public class Boss : MonoBehaviour
         spinned = !spinned;
     }
 
-    
+
 
     IEnumerator Run()
     {
@@ -70,13 +75,16 @@ public class Boss : MonoBehaviour
             AnimatorStateInfo animatorStateInfo = anim.GetCurrentAnimatorStateInfo(0);
             Vector3 translation = (playerTransform.position - _transform.position).normalized * 1f * Time.deltaTime;
 
+            if (!animatorStateInfo.IsName("Punch") && !animatorStateInfo.IsName("fistrotateleft") && !animatorStateInfo.IsName("fistrotateright"))
+                punchTargetLocked = false;
+
             isLeft = translation.x < 0;
             anim.SetBool("isLeft", isLeft);
 
             if (animatorStateInfo.IsName("idle"))
             {
-                
-                
+
+
             }
             else if (animatorStateInfo.IsName("trace_left"))
             {
@@ -95,7 +103,7 @@ public class Boss : MonoBehaviour
                 else if (randomValue >= 0.97)
                 {
                     anim.SetTrigger("fistRotation");
-                    
+
                 }
                 else
                 {
@@ -103,7 +111,7 @@ public class Boss : MonoBehaviour
                     _transform.position = Vector2.MoveTowards(_transform.position, playerTransform.position, speed * Time.deltaTime);
                 }
 
-                
+
 
             }
             else if (animatorStateInfo.IsName("trace_right"))
@@ -151,24 +159,30 @@ public class Boss : MonoBehaviour
                     {
                         if (spinned ^ isLeft)
                         {
-                            anim.SetTrigger("PunchCollided");                            
+                            anim.SetTrigger("PunchCollided");
                         }
                         else
                         {
                             anim.SetTrigger("needSpin");
-                        }                        
+                        }
                     }
-                    
+
                 }
 
-                _transform.Translate(-0.3f * Vector3.right);
-                
+                if (!punchTargetLocked)
+                    SetPunchTarget();
+
+                if (hasPunchTarget)
+                    MoveToPunchTarget();
+
             }
             else if (animatorStateInfo.IsName("fistrotateleft"))
             {
-                
+
                 if (Mathf.Abs(Vector2.SignedAngle(new Vector2(-_transform.right.x, -_transform.right.y), new Vector2(translation.x, translation.y))) < 5f)
                 {
+                    if (!punchTargetLocked)
+                        SetPunchTarget();
                     anim.SetTrigger("PunchStart");
                 }
                 else
@@ -179,9 +193,11 @@ public class Boss : MonoBehaviour
             }
             else if (animatorStateInfo.IsName("fistrotateright"))
             {
-                
+
                 if (Mathf.Abs(Vector2.SignedAngle(new Vector2(-_transform.right.x, -_transform.right.y), new Vector2(translation.x, translation.y))) < 5f)
                 {
+                    if (!punchTargetLocked)
+                        SetPunchTarget();
                     anim.SetTrigger("PunchStart");
                 }
                 else
@@ -208,7 +224,7 @@ public class Boss : MonoBehaviour
             }
             else if (animatorStateInfo.IsName("rotatetoright"))
             {
-                
+
                 //(0,180,20)
                 //if (!(spinned ^ isLeft))
                 //{
@@ -228,7 +244,6 @@ public class Boss : MonoBehaviour
             {
                 _transform.position = _transform.position - new Vector3(0, 0.1f,0);
             }
-
             yield return new WaitForSeconds(0.03f);
         }
     }
@@ -241,7 +256,37 @@ public class Boss : MonoBehaviour
         currentRock.GetComponent<Rigidbody2D>().linearVelocity = rockspeed * (playerTransform.position - transform.position).normalized;
     }
 
-    
+    void SetPunchTarget()
+    {
+        punchTargetPosition = new Vector3(playerTransform.position.x, playerTransform.position.y, _transform.position.z);
+        hasPunchTarget = true;
+        punchTargetLocked = true;
+    }
+
+    void MoveToPunchTarget()
+    {
+        _transform.position = Vector3.MoveTowards(_transform.position, punchTargetPosition, 0.3f);
+        if (_transform.position == punchTargetPosition)
+            hasPunchTarget = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        TryKillPlayer(collision.gameObject);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        TryKillPlayer(collision.gameObject);
+    }
+
+    static void TryKillPlayer(GameObject hitObject)
+    {
+        if (hitObject.GetComponent<PlayerController>() != null)
+            Simulation.Schedule<PlayerDeath>(0);
+    }
+
+
 
 
 

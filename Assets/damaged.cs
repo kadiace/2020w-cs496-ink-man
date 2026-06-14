@@ -1,5 +1,6 @@
 using Platformer.Core;
 using Platformer.Model;
+using Platformer.Mechanics;
 using UnityEngine;
 
 public class damaged : MonoBehaviour
@@ -10,16 +11,22 @@ public class damaged : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.GetComponent<PlayerController>() != null)
+        {
+            Simulation.Schedule<Platformer.Gameplay.PlayerDeath>(0);
+            return;
+        }
+
         Debug.Log("collided");
         if (collision.gameObject.CompareTag("line"))
         {
@@ -52,7 +59,7 @@ public class damaged : MonoBehaviour
 
                 Simulation.Schedule<Platformer.Gameplay.ShowBossClearOverlay>(1.2f);
             }
-             
+
         }
         //else if ()
         //{

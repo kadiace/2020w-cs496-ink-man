@@ -1202,11 +1202,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press Main Button if you want to go Main View.
+  m_text: 'Help Ink Man escape from the notebook.
 
 
-    Press ''Esc'' to
-    go back to Game.'
+    Clear each stage, defeat Jungin in the boss stage, and reach the world outside.
+
+
+    Move with A/D or the arrow keys, jump with Space, and hold Shift for slow mode.
+    In slow mode, drag with left click to draw shapes and right click to erase them.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1536,7 +1539,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Platformer Template
+  m_text: Ink Man
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1719,6 +1722,8 @@ MonoBehaviour:
     A - Left Shift
 
     D - Right Shift
+
+    Space - Jump
 
     Shift - Time
     Pause

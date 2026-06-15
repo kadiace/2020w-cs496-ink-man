@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
@@ -38,7 +36,13 @@ namespace Platformer.Mechanics
         public Health health;
         public bool controlEnabled = true;
 
+        public static bool useEditorInputOverride;
+        public static float editorHorizontalInput;
+        public static bool editorJumpDown;
+        public static bool editorJumpUp = true;
+
         bool jump;
+        bool editorJumpHeld;
         Vector2 move;
         SpriteRenderer spriteRenderer;
         internal Animator animator;
@@ -70,10 +74,28 @@ namespace Platformer.Mechanics
         {
             if (controlEnabled)
             {
-                move.x = Input.GetAxis("Horizontal");
-                if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+                var jumpDown = false;
+                var jumpUp = false;
+
+                if (useEditorInputOverride)
+                {
+                    move.x = editorHorizontalInput;
+
+                    var jumpHeld = editorJumpDown && !editorJumpUp;
+                    jumpDown = jumpHeld && !editorJumpHeld;
+                    jumpUp = !jumpHeld && editorJumpHeld;
+                    editorJumpHeld = jumpHeld;
+                }
+                else
+                {
+                    move.x = Input.GetAxis("Horizontal");
+                    jumpDown = Input.GetButtonDown("Jump");
+                    jumpUp = Input.GetButtonUp("Jump");
+                }
+
+                if (jumpState == JumpState.Grounded && jumpDown)
                     jumpState = JumpState.PrepareToJump;
-                else if (Input.GetButtonUp("Jump"))
+                else if (jumpUp)
                 {
                     stopJump = true;
                     Schedule<PlayerStopJump>().player = this;

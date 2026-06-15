@@ -94,7 +94,6 @@ public class Boss : MonoBehaviour
                 {
                     if (!rockThrown)
                     {
-                        Debug.Log("1234");
                         anim.SetTrigger("drawRock_left");
                         Invoke("CreateRock", 0.5f);
                         rockThrown = true;
@@ -137,7 +136,7 @@ public class Boss : MonoBehaviour
                 else
                 {
                     //_transform.Movet
-                    _transform.position = Vector2.MoveTowards(_transform.position, playerTransform.position, speed*Time.deltaTime);
+                    _transform.position = Vector2.MoveTowards(_transform.position, playerTransform.position, speed * Time.deltaTime);
                 }
 
 
@@ -213,7 +212,7 @@ public class Boss : MonoBehaviour
                 //    anim.SetTrigger("needSpin");
                 //}
 
-                if (Mathf.Abs(Vector2.SignedAngle(defaultleftVector, _transform.right))<5f)
+                if (Mathf.Abs(Vector2.SignedAngle(defaultleftVector, _transform.right)) < 5f)
                 {
                     anim.SetTrigger("rotationBeforeTrace");
                 }
@@ -242,7 +241,7 @@ public class Boss : MonoBehaviour
             }
             else if (animatorStateInfo.IsName("Dead"))
             {
-                _transform.position = _transform.position - new Vector3(0, 0.1f,0);
+                _transform.position = _transform.position - new Vector3(0, 0.1f, 0);
             }
             yield return new WaitForSeconds(0.03f);
         }

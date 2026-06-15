@@ -1131,6 +1131,7 @@ GameObject:
   - component: {fileID: 1000236621}
   - component: {fileID: 1000236623}
   - component: {fileID: 1000236624}
+  - component: {fileID: 1000236625}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: tile
@@ -3206,11 +3207,30 @@ TilemapCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!251 &1000236625
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000236619}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_UseSideFriction: 1
+  m_UseSideBounce: 1
+  m_SurfaceArc: 180
+  m_SideArc: 1
+  m_RotationalOffset: 0
 --- !u!114 &1000236624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4397,6 +4417,7 @@ GameObject:
   - component: {fileID: 1954763734}
   - component: {fileID: 1954763733}
   - component: {fileID: 1954763732}
+  - component: {fileID: 1954763735}
   m_Layer: 0
   m_Name: Tilemap (1)
   m_TagString: boss
@@ -4429,11 +4450,30 @@ TilemapCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!251 &1954763735
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954763730}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_UseSideFriction: 1
+  m_UseSideBounce: 1
+  m_SurfaceArc: 180
+  m_SideArc: 1
+  m_RotationalOffset: 0
 --- !u!483693784 &1954763733
 TilemapRenderer:
   m_ObjectHideFlags: 0

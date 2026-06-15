@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Platformer.Mechanics
 {
@@ -77,12 +75,12 @@ namespace Platformer.Mechanics
         protected virtual void OnEnable()
         {
             body = GetComponent<Rigidbody2D>();
-            body.isKinematic = false;
+            body.bodyType = RigidbodyType2D.Dynamic;
         }
 
         protected virtual void OnDisable()
         {
-            body.isKinematic = false;
+            body.bodyType = RigidbodyType2D.Dynamic;
         }
 
         protected virtual void Start()
@@ -139,6 +137,14 @@ namespace Platformer.Mechanics
                 var count = body.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
                 for (var i = 0; i < count; i++)
                 {
+                    var hitCollider = hitBuffer[i].collider;
+                    if (velocity.y > 0 && hitCollider.usedByEffector)
+                    {
+                        var platformEffector = hitCollider.GetComponent<PlatformEffector2D>();
+                        if (platformEffector != null && platformEffector.enabled && platformEffector.useOneWay)
+                            continue;
+                    }
+
                     var currentNormal = hitBuffer[i].normal;
 
                     //is this surface flat enough to land on?

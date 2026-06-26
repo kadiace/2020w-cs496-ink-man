@@ -4,7 +4,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"C:/Users/9/Projects/Unity/2020W_CS496_Project3_Ink-Man/dist;C:/Users/9/Projects/Unity/2020W_CS496_Project3_Ink-Man/ink-man;;;;;;;;\"}"
+                "value": "{\"m_Value\":\"C:/Users/9/Projects/unity/2020w-cs496-ink-man/Web;C:/Users/9/Projects/Unity/2020W_CS496_Project3_Ink-Man/dist;C:/Users/9/Projects/Unity/2020W_CS496_Project3_Ink-Man/ink-man;;;;;;;\"}"
             }
         ]
     }

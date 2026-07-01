@@ -1239,8 +1239,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8039950277454507671, guid: b3f9abbe012f5e64bb86733dc9e1e82a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 469569089}
   m_SourcePrefab: {fileID: 100100000, guid: b3f9abbe012f5e64bb86733dc9e1e82a, type: 3}
+--- !u!1 &469569088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8039950277454507671, guid: b3f9abbe012f5e64bb86733dc9e1e82a,
+    type: 3}
+  m_PrefabInstance: {fileID: 469569087}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &469569089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469569088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc1fbcf600699c641b8a1d8f5c7a1cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::eraser
+  Camera: {fileID: 1509354846}
 --- !u!1001 &491084661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13866,6 +13889,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06a6b93cb2100aa43bf9c82923a4c1b9, type: 3}
+--- !u!20 &1509354846 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2427950616468086215, guid: 06a6b93cb2100aa43bf9c82923a4c1b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1509354845}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1591509431
 GameObject:
   m_ObjectHideFlags: 0

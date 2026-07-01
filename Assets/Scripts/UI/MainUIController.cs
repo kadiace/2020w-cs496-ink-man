@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace Platformer.UI
@@ -22,8 +23,17 @@ namespace Platformer.UI
 
         void OnEnable()
         {
+            EnsureEventSystem();
             SetActivePanel(0);
         }
+
+        void EnsureEventSystem()
+        {
+            if (EventSystem.current != null) return;
+
+            new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
+        }
+
         public void ToMain()
         {
             SceneManager.LoadScene("MainScene");

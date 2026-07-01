@@ -1,6 +1,7 @@
 using Platformer.Mechanics;
 using Platformer.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Platformer.UI
 {
@@ -29,7 +30,15 @@ namespace Platformer.UI
 
         void OnEnable()
         {
+            EnsureEventSystem();
             _ToggleMainMenu(showMainCanvas);
+        }
+
+        void EnsureEventSystem()
+        {
+            if (EventSystem.current != null) return;
+
+            new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
         }
 
         /// <summary>
